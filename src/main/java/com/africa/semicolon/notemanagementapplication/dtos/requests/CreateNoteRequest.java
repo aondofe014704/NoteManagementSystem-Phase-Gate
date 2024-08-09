@@ -1,4 +1,4 @@
-package com.africa.semicolon.notemanagementapplication.dtos;
+package com.africa.semicolon.notemanagementapplication.dtos.requests;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -4,6 +4,7 @@ import com.africa.semicolon.notemanagementapplication.data.repositories.ActorRep
 import com.africa.semicolon.notemanagementapplication.dtos.requests.LoginActorRequest;
 import com.africa.semicolon.notemanagementapplication.dtos.requests.RegisterActorRequest;
 import com.africa.semicolon.notemanagementapplication.dtos.responses.LoginActorResponse;
+import com.africa.semicolon.notemanagementapplication.dtos.responses.LogoutActorResponse;
 import com.africa.semicolon.notemanagementapplication.dtos.responses.RegisterActorResponse;
 import com.africa.semicolon.notemanagementapplication.exceptions.EmailAlreadyExistsException;
 import com.africa.semicolon.notemanagementapplication.exceptions.InvalidPasswordException;
@@ -71,7 +72,18 @@ public class ActorServiceTest {
         LoginActorRequest loginActorRequest = new LoginActorRequest();
         loginActorRequest.setEmail("songujack@gmail.com");
         loginActorRequest.setPassword("wrongPassword");
-        assertThrows(WrongPasswordException.class, () -> actorService.login(loginActorRequest));
+        assertThrows(InvalidPasswordException.class, () -> actorService.login(loginActorRequest));
+    }
+    @Test
+    public void testToLogOut(){
+        actorService.register(registerActorRequest());
+        LoginActorRequest loginActorRequest = new LoginActorRequest();
+        loginActorRequest.setEmail("songujack@gmail.com");
+        loginActorRequest.setPassword("1234567");
+        actorService.login(loginActorRequest);
+        LogoutActorResponse logoutActorResponse = actorService.logout(loginActorRequest.getEmail());
+        assertThat(logoutActorResponse).isNotNull();
+        assertThat(logoutActorResponse.getMessage()).contains("successfully");
     }
 
 }

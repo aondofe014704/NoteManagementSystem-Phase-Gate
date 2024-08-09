@@ -2,11 +2,12 @@ package com.africa.semicolon.notemanagementapplication.utils;
 
 import com.africa.semicolon.notemanagementapplication.data.model.Actor;
 import com.africa.semicolon.notemanagementapplication.data.model.Notes;
-import com.africa.semicolon.notemanagementapplication.dtos.CreateNoteRequest;
+import com.africa.semicolon.notemanagementapplication.dtos.requests.CreateNoteRequest;
 import com.africa.semicolon.notemanagementapplication.dtos.requests.RegisterActorRequest;
 import com.africa.semicolon.notemanagementapplication.dtos.responses.CreateNoteResponse;
 import com.africa.semicolon.notemanagementapplication.dtos.responses.LoginActorResponse;
 import com.africa.semicolon.notemanagementapplication.dtos.responses.RegisterActorResponse;
+import com.africa.semicolon.notemanagementapplication.dtos.responses.UpdateNoteResponse;
 
 import java.time.LocalDateTime;
 
@@ -36,12 +37,20 @@ public class Mapper {
         notes.setContent(createNoteRequest.getContent());
         notes.setDateCreated(LocalDateTime.now());
     }
-    public static CreateNoteResponse mapCreateResponse(Notes notes) {
+    public static CreateNoteResponse mapCreateNoteResponse(Notes notes) {
         CreateNoteResponse createNoteResponse = new CreateNoteResponse();
         createNoteResponse.setNoteId(notes.getId());
         createNoteResponse.setNoteContent(notes.getContent());
         createNoteResponse.setNoteTitle(createNoteResponse.getNoteTitle());
         createNoteResponse.setDateCreated(LocalDateTime.now());
         return createNoteResponse;
+    }
+    public static UpdateNoteResponse mapUpdateNoteResponse(Notes notes){
+        UpdateNoteResponse updateNoteResponse = new UpdateNoteResponse();
+        updateNoteResponse.setNoteId(notes.getId());
+        updateNoteResponse.setUpdatedTitle(notes.getTitle());
+        updateNoteResponse.setUpdatedContent(notes.getContent());
+        updateNoteResponse.setDateUpdated(notes.getDateModified());
+        return updateNoteResponse;
     }
 }

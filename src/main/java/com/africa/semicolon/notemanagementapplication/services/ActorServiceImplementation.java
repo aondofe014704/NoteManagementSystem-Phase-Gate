@@ -5,6 +5,7 @@ import com.africa.semicolon.notemanagementapplication.data.repositories.ActorRep
 import com.africa.semicolon.notemanagementapplication.dtos.requests.LoginActorRequest;
 import com.africa.semicolon.notemanagementapplication.dtos.requests.RegisterActorRequest;
 import com.africa.semicolon.notemanagementapplication.dtos.responses.LoginActorResponse;
+import com.africa.semicolon.notemanagementapplication.dtos.responses.LogoutActorResponse;
 import com.africa.semicolon.notemanagementapplication.dtos.responses.RegisterActorResponse;
 import com.africa.semicolon.notemanagementapplication.exceptions.EmailAlreadyExistsException;
 import com.africa.semicolon.notemanagementapplication.exceptions.InvalidPasswordException;
@@ -41,19 +42,31 @@ public class ActorServiceImplementation implements ActorService {
     }
 
     @Override
-    public LoginActorResponse login(LoginActorRequest loginActorRequest) {
+    public LoginActorResponse login (LoginActorRequest loginActorRequest) {
         Actor actor = findByEmail(loginActorRequest.getEmail());
-        validatePassword(loginActorRequest.getPassword());
+        validatePassword(actor.getPassword(),loginActorRequest.getPassword());
         actor.setLoggedIn(true);
         actorRepository.save(actor);
         return mapLogin(actor);
     }
+
+    @Override
+    public LogoutActorResponse logout(String email) {
+        Actor actor = findByEmail(email);
+        actor.setLoggedIn(false);
+        actorRepository.save(actor);
+        LogoutActorResponse logoutResponse = new LogoutActorResponse();
+        logoutResponse.setMessage("user logged out successfully");
+        logoutResponse.setLoggedIn(actor.isLoggedIn());
+        return logoutResponse;
+    }
+
     private Actor findByEmail(String email) {
         Actor actor =  actorRepository.findByEmail(email);
         if(actor == null) throw new UserNotFoundException("User not found");
         return actor;
     }
-    private void validatePassword(String password) {
-        if(!password.matches(password)) throw new InvalidPasswordException("Invalid Details");
+    private void validatePassword(String actorPassword,String password) {
+        if(!password.matches(actorPassword)) throw new InvalidPasswordException("Invalid Details");
     }
 }
