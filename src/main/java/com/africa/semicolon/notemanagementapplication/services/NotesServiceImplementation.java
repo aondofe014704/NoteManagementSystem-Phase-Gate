@@ -4,6 +4,7 @@ import com.africa.semicolon.notemanagementapplication.data.model.Notes;
 import com.africa.semicolon.notemanagementapplication.data.repositories.NotesRepository;
 import com.africa.semicolon.notemanagementapplication.dtos.requests.CreateNoteRequest;
 import com.africa.semicolon.notemanagementapplication.dtos.requests.UpdateNoteRequest;
+import com.africa.semicolon.notemanagementapplication.dtos.responses.CreateNoteResponse;
 import com.africa.semicolon.notemanagementapplication.dtos.responses.DeleteNoteResponse;
 import com.africa.semicolon.notemanagementapplication.dtos.responses.UpdateNoteResponse;
 import com.africa.semicolon.notemanagementapplication.exceptions.NoteNotFoundException;
@@ -21,7 +22,7 @@ public class NotesServiceImplementation implements NotesService{
     @Autowired
     private NotesRepository notesRepository;
     @Override
-    public com.africa.semicolon.notemanagementapplication.dtos.responses.CreateNoteResponse createNote(CreateNoteRequest createNoteRequest) {
+    public CreateNoteResponse createNote(CreateNoteRequest createNoteRequest) {
         validateTitle(createNoteRequest.getTitle());
         Notes notes = new Notes();
         notes.setTitle(createNoteRequest.getTitle());
@@ -63,7 +64,6 @@ public class NotesServiceImplementation implements NotesService{
         DeleteNoteResponse deleteNoteResponse = new DeleteNoteResponse();
         deleteNoteResponse.setMessage("Note deleted successfully");
         return deleteNoteResponse;
-
     }
 
 }

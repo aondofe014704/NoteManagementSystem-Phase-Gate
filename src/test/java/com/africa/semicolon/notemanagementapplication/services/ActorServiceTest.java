@@ -1,14 +1,12 @@
 package com.africa.semicolon.notemanagementapplication.services;
 
 import com.africa.semicolon.notemanagementapplication.data.repositories.ActorRepository;
-import com.africa.semicolon.notemanagementapplication.dtos.requests.LoginActorRequest;
 import com.africa.semicolon.notemanagementapplication.dtos.requests.RegisterActorRequest;
 import com.africa.semicolon.notemanagementapplication.dtos.responses.LoginActorResponse;
 import com.africa.semicolon.notemanagementapplication.dtos.responses.LogoutActorResponse;
 import com.africa.semicolon.notemanagementapplication.dtos.responses.RegisterActorResponse;
 import com.africa.semicolon.notemanagementapplication.exceptions.EmailAlreadyExistsException;
 import com.africa.semicolon.notemanagementapplication.exceptions.InvalidPasswordException;
-import com.africa.semicolon.notemanagementapplication.exceptions.WrongPasswordException;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -59,7 +57,7 @@ public class ActorServiceTest {
     @Test
     public void testToLoginToLoginAnActor(){
         actorService.register(registerActorRequest());
-        LoginActorRequest loginActorRequest = new LoginActorRequest();
+        com.africa.semicolon.notemanagementapplication.dtos.requests.LoginActorRequest loginActorRequest = new com.africa.semicolon.notemanagementapplication.dtos.requests.LoginActorRequest();
         loginActorRequest.setEmail("songujack@gmail.com");
         loginActorRequest.setPassword("1234567");
         LoginActorResponse loginActorResponse = actorService.login(loginActorRequest);
@@ -69,7 +67,7 @@ public class ActorServiceTest {
     @Test
     public void testToLoginWithWrongPassword_ThrowException(){
         actorService.register(registerActorRequest());
-        LoginActorRequest loginActorRequest = new LoginActorRequest();
+        com.africa.semicolon.notemanagementapplication.dtos.requests.LoginActorRequest loginActorRequest = new com.africa.semicolon.notemanagementapplication.dtos.requests.LoginActorRequest();
         loginActorRequest.setEmail("songujack@gmail.com");
         loginActorRequest.setPassword("wrongPassword");
         assertThrows(InvalidPasswordException.class, () -> actorService.login(loginActorRequest));
@@ -77,7 +75,7 @@ public class ActorServiceTest {
     @Test
     public void testToLogOut(){
         actorService.register(registerActorRequest());
-        LoginActorRequest loginActorRequest = new LoginActorRequest();
+        com.africa.semicolon.notemanagementapplication.dtos.requests.LoginActorRequest loginActorRequest = new com.africa.semicolon.notemanagementapplication.dtos.requests.LoginActorRequest();
         loginActorRequest.setEmail("songujack@gmail.com");
         loginActorRequest.setPassword("1234567");
         actorService.login(loginActorRequest);

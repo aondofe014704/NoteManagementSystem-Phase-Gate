@@ -2,8 +2,9 @@ package com.africa.semicolon.notemanagementapplication.services;
 
 import com.africa.semicolon.notemanagementapplication.data.model.Actor;
 import com.africa.semicolon.notemanagementapplication.data.repositories.ActorRepository;
-import com.africa.semicolon.notemanagementapplication.dtos.requests.LoginActorRequest;
+import com.africa.semicolon.notemanagementapplication.dtos.requests.CreateNoteRequest;
 import com.africa.semicolon.notemanagementapplication.dtos.requests.RegisterActorRequest;
+import com.africa.semicolon.notemanagementapplication.dtos.responses.CreateNoteResponse;
 import com.africa.semicolon.notemanagementapplication.dtos.responses.LoginActorResponse;
 import com.africa.semicolon.notemanagementapplication.dtos.responses.LogoutActorResponse;
 import com.africa.semicolon.notemanagementapplication.dtos.responses.RegisterActorResponse;
@@ -42,7 +43,12 @@ public class ActorServiceImplementation implements ActorService {
     }
 
     @Override
-    public LoginActorResponse login (LoginActorRequest loginActorRequest) {
+    public CreateNoteResponse createNote(CreateNoteRequest createNoteRequest) {
+        return null;
+    }
+
+    @Override
+    public LoginActorResponse login (com.africa.semicolon.notemanagementapplication.dtos.requests.LoginActorRequest loginActorRequest) {
         Actor actor = findByEmail(loginActorRequest.getEmail());
         validatePassword(actor.getPassword(),loginActorRequest.getPassword());
         actor.setLoggedIn(true);

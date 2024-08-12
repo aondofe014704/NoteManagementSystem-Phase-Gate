@@ -47,7 +47,7 @@ public class NotesServiceTest {
     }
 
     @Test
-    public void testCreateNoteWithSameTitle_throwsException() {
+    public void testCreateNoteWithSameTitle_ThrowsException() {
         CreateNoteResponse createNoteResponse = createNewNoteRequest();
         CreateNoteRequest createNoteRequest = new CreateNoteRequest();
         createNoteRequest.setTitle("Woman called Mary Clark Panda");

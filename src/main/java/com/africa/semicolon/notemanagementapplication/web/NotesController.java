@@ -6,7 +6,7 @@ import com.africa.semicolon.notemanagementapplication.dtos.responses.ApiResponse
 import com.africa.semicolon.notemanagementapplication.dtos.responses.CreateNoteResponse;
 import com.africa.semicolon.notemanagementapplication.dtos.responses.UpdateNoteResponse;
 import com.africa.semicolon.notemanagementapplication.services.NotesService;
-import lombok.AllArgsConstructor;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +35,15 @@ public class NotesController {
             return new ResponseEntity<>(new ApiResponse(true, updateNoteResponse),OK);
         }catch(Exception exception){
             return new ResponseEntity<>(new ApiResponse(false,exception.getMessage()), BAD_REQUEST);
+        }
+    }
+    @DeleteMapping("/delete-note{id}")
+    public ResponseEntity<?> deleteNote(@PathVariable("id") String note){
+        try{
+            notesService.deleteNote(note);
+            return new ResponseEntity<>(new ApiResponse(true, "Note deleted successfully"), OK);
+        }catch (Exception exception){
+            return new ResponseEntity<>(new ApiResponse(false, exception.getMessage()), BAD_REQUEST);
         }
     }
 }
