@@ -74,4 +74,17 @@ public class NotesServiceTest {
         assertThat(deleteNoteResponse1).isNotNull();
         assertThat(deleteNoteResponse1.getMessage()).contains("deleted");
     }
+//    @Test
+//    public void testToShareNoteAmongActors(){
+//        CreateNoteResponse createNoteResponse = createNewNoteRequest();
+//        String noteId = createNoteResponse.getNoteId();
+//        notesService.shareNoteAmongActors(noteId, "john@gmail.com", "jane@gmail.com");
+//        assertThat(notesService.getNoteById(noteId).getActors()).contains("john@gmail.com", "jane@gmail.com");
+//    }
+}
+@Test
+public void testGetAllNotes(){
+    CreateNoteResponse createNoteResponse = createNewNoteRequest();
+    List<Note> notes = notesService.getAllNotes();
+    assertThat(notes.size()).isEqualTo(1L);
 }

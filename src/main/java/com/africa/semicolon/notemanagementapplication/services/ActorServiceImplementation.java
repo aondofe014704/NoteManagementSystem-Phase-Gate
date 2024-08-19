@@ -72,7 +72,7 @@ public class ActorServiceImplementation implements ActorService {
         if(actor == null) throw new UserNotFoundException("User not found");
         return actor;
     }
-    private void validatePassword(String actorPassword,String password) {
+    private void validatePassword(String actorPassword, String password) {
         if(!password.matches(actorPassword)) throw new InvalidPasswordException("Invalid Details");
     }
 }
